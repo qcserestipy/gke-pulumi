@@ -1,0 +1,3 @@
+config:
+  gcp:project: yukaringermany-gke
+  yukaringermany-gke:cluster_name: gkecluster
