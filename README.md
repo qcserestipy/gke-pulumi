@@ -30,6 +30,8 @@ This repository is a Pulumi-based infrastructure-as-code (IaC) project for deplo
 ```
 export PROJECT_ID=yukaringermany-gke 
 
+gcloud services enable iap.googleapis.com
+
 gcloud iam workload-identity-pools create "githuboauthpool" \
     --project="${PROJECT_ID}" \
     --location="global" 
