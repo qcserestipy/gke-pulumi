@@ -29,6 +29,7 @@ This repository is a Pulumi-based infrastructure-as-code (IaC) project for deplo
 
 ## 1. Set Project and Enable Required Services
 
+
 ```bash
 export PROJECT_ID=yukaringermany-gke
 
