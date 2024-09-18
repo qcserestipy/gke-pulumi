@@ -51,12 +51,12 @@ jobs:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
 
-      # # Step 6: Pulumi Up (deploy the infrastructure)
-      # - name: 'Pulumi Up'
-      #   uses: 'pulumi/actions@v6'
-      #   with:
-      #     command: up
-      #     stack-name: 'qcserestipy/dev'
-      #   env:
-      #     PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-      #     GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      # Step 6: Pulumi Up (deploy the infrastructure)
+      - name: 'Pulumi Up'
+        uses: 'pulumi/actions@v5'
+        with:
+          command: up
+          stack-name: 'qcserestipy/dev'
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
