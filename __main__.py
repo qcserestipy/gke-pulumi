@@ -13,7 +13,6 @@ zone = "europe-west1"
 latest_engine_version = container.get_engine_versions(location=region).release_channel_latest_version['REGULAR']
 pulumi.export("latest_engine_version", latest_engine_version)
 
-# Create the network stack
 network_stack = NetworkStack(
     name=cluster_name,
     config=config,
