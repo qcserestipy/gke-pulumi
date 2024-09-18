@@ -83,6 +83,10 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
    --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
    --role="roles/iam.serviceAccountAdmin"
 
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \                                 
+   --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \ 
+   --role="roles/resourcemanager.projectIamAdmin"
+
 gcloud container clusters get-credentials yukaringermany-gke --region us-central1 --project yukaringermany-gke
 
 ```
