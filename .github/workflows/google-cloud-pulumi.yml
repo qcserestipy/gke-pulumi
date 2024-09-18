@@ -3,10 +3,10 @@ name: 'Deploy to Google Cloud with Pulumi'
 on:
   push:
     branches:
-      - '"main"'
+      - main
 
 env:
-  REGION: 'europe-west1' # TODO: update to your region
+  REGION: 'europe-west1'  # TODO: update to your region
 
 jobs:
   deploy:
@@ -17,10 +17,11 @@ jobs:
       id-token: 'write'
 
     steps:
+      # Step 1: Checkout the code
       - name: 'Checkout'
         uses: 'actions/checkout@v4'
 
-      # Configure Workload Identity Federation and generate an access token.
+      # Step 2: Authenticate with Google Cloud using Workload Identity Federation
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.4.0'
@@ -28,3 +29,34 @@ jobs:
           workload_identity_provider: 'projects/${{ secrets.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/githuboauthpool/providers/githuboauth-provider'
           service_account: 'githubactions@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
 
+      # Step 3: Install Pulumi CLI
+      - name: 'Install Pulumi CLI'
+        uses: 'pulumi/actions@v5'
+        with:
+          pulumi-version: 'latest'
+
+      # Step 4: Install dependencies (for Python or any other package management)
+      - name: 'Install Python Dependencies'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Step 5: Pulumi Preview (optional)
+      - name: 'Pulumi Preview'
+        uses: 'pulumi/actions@v5'
+        with:
+          command: preview
+          stack-name: 'qcserestipy/dev'
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+
+      # # Step 6: Pulumi Up (deploy the infrastructure)
+      # - name: 'Pulumi Up'
+      #   uses: 'pulumi/actions@v6'
+      #   with:
+      #     command: up
+      #     stack-name: 'qcserestipy/dev'
+      #   env:
+      #     PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+      #     GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
