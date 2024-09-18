@@ -29,7 +29,7 @@ class GkeClusterStack:
             master_authorized_networks_config=container.ClusterMasterAuthorizedNetworksConfigArgs(
                 cidr_blocks=[
                     container.ClusterMasterAuthorizedNetworksConfigCidrBlockArgs(
-                        cidr_block="127.0.0.1/32",  # Change this to restrict access, such as to a trusted IP range
+                        cidr_block="93.203.225.76/32",  # Change this to restrict access, such as to a trusted IP range
                         display_name="Allow Me", 
                     )
                 ],
