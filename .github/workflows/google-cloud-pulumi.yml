@@ -31,7 +31,7 @@ jobs:
 
       # Step 3: Install Pulumi CLI
       - name: 'Install Pulumi CLI'
-        uses: 'pulumi/actions@v6'
+        uses: 'pulumi/actions@v5'
         with:
           pulumi-version: 'latest'
 
@@ -43,7 +43,7 @@ jobs:
 
       # Step 5: Pulumi Preview (optional)
       - name: 'Pulumi Preview'
-        uses: 'pulumi/actions@v6'
+        uses: 'pulumi/actions@v5'
         with:
           command: preview
           stack-name: 'qcserestipy/dev'
