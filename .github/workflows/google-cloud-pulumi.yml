@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  REGION: 'europe-west1'  # TODO: update to your region
+  REGION: 'us-central1'
 
 jobs:
   deploy:
