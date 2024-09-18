@@ -102,6 +102,10 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
     --role="roles/compute.storageAdmin"
+
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/compute.securityAdmin"
 ```
 
 ## 5. Get GKE Cluster Credentials
