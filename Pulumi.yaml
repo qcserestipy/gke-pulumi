@@ -1,0 +1,11 @@
+name: yukaringermany-gke
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+description: A minimal Google Cloud Python Pulumi program
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: gcp-python
