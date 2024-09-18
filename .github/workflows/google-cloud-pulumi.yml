@@ -29,28 +29,34 @@ jobs:
           workload_identity_provider: 'projects/${{ secrets.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/githuboauthpool/providers/githuboauth-provider'
           service_account: 'githubactions@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
 
-      # Step 3: Set up the Pulumi CLI
+      # Step 3: Install Pulumi CLI
       - name: 'Install Pulumi CLI'
-        uses: 'pulumi/actions-install-pulumi-cli@v3.0.0'
+        uses: 'pulumi/actions@v6'
+        with:
+          pulumi-version: 'latest'
 
-      # Step 4: Install Python dependencies (assuming a Python Pulumi project)
+      # Step 4: Install dependencies (for Python or any other package management)
       - name: 'Install Python Dependencies'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 5: Log in to Pulumi
-      - name: 'Pulumi Login'
-        run: pulumi login
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-
-      # Step 6: Pulumi Preview (optional, to see what changes will be made)
+      # Step 5: Pulumi Preview (optional)
       - name: 'Pulumi Preview'
-        run: pulumi preview
-
-      # Step 7: Pulumi Update (deploy the infrastructure)
-      - name: 'Pulumi Up'
-        run: pulumi up --yes
+        uses: 'pulumi/actions@v6'
+        with:
+          command: preview
+          stack-name: 'qcserestipy/dev'
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+
+      # # Step 6: Pulumi Up (deploy the infrastructure)
+      # - name: 'Pulumi Up'
+      #   uses: 'pulumi/actions@v6'
+      #   with:
+      #     command: up
+      #     stack-name: 'qcserestipy/dev'
+      #   env:
+      #     PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+      #     GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
