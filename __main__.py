@@ -1,8 +1,8 @@
 import pulumi
 from pulumi_gcp import container
-from network import NetworkStack
-from cluster import GkeClusterStack
-from compute import GkeNodePoolStack
+from gke.network import NetworkStack
+from gke.cluster import GkeClusterStack
+from gke.compute import GkeNodePoolStack
 
 # Load configuration
 config = pulumi.Config()
