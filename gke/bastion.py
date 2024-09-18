@@ -10,6 +10,9 @@ class GkeBastionHostStack:
         machine_type: str = "e2-micro",
         image: str = "debian-cloud/debian-11",
     ):
+
+        # This bastion host is implemented according to:
+        # https://cloud.google.com/kubernetes-engine/docs/tutorials/private-cluster-bastion 
         
         # Define network tag to identify the bastion host
         bastion_host_tag = f"{name}-tag"
