@@ -48,4 +48,6 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --role="roles/iam.serviceAccountUser" \
     --condition=None
 
+gcloud container clusters get-credentials yukaringermany-gke --region us-central1 --project yukaringermany-gke
+
 ```
