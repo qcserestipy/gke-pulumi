@@ -1,0 +1,30 @@
+name: 'Deploy to Google Cloud with Pulumi'
+
+on:
+  push:
+    branches:
+      - '"main"'
+
+env:
+  REGION: 'europe-west1' # TODO: update to your region
+
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      # Configure Workload Identity Federation and generate an access token.
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0.4.0'
+        with:
+          workload_identity_provider: 'projects/${{ secrets.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/githuboauthpool/providers/githuboauth-provider'
+          service_account: 'githubactions@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
+
