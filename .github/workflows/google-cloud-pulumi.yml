@@ -27,7 +27,7 @@ jobs:
         uses: 'google-github-actions/auth@v0.4.0'
         with:
           workload_identity_provider: 'projects/${{ secrets.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/githuboauthpool/providers/githuboauth-provider'
-          service_account: 'githubactions@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
+          service_account: '${{ secrets.GCP_SERVICE_ACCOUNT_NAME }}'
 
       # Step 3: Install Pulumi CLI
       - name: 'Install Pulumi CLI'
