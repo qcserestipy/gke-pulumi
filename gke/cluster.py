@@ -24,6 +24,7 @@ class GkeClusterStack:
             private_cluster_config=container.ClusterPrivateClusterConfigArgs(
                 enable_private_nodes=True,
                 enable_private_endpoint=True,
+                master_ipv4_cidr_block="10.0.0.0/28"
             ),
         )
 
