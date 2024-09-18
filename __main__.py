@@ -38,5 +38,5 @@ gke_nodepool_stack = GkeNodePoolStack(
 gke_bastion_host = GkeBastionHostStack(
     vpc_id=network_stack.vpc.id,
     region=region,
-    public_subnet_id=network_stack.public_subnet.id,
+    private_subnet_id=network_stack.private_subnet.id,
 )
