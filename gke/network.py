@@ -12,7 +12,7 @@ class NetworkStack:
         # Create public and private subnets without the 'tags' argument
         self.public_subnet = compute.Subnetwork(
             f"{name}-public-subnet",
-            ip_cidr_range="10.0.0.0/19",
+            ip_cidr_range="10.0.64.0/19",
             region=region,
             network=self.vpc.id,
             description="Public Subnet for GKE",
