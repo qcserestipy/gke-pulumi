@@ -3,6 +3,7 @@ from pulumi_gcp import container
 from gke.network import NetworkStack
 from gke.cluster import GkeClusterStack
 from gke.compute import GkeNodePoolStack
+from gke.bastion import GkeBastionHostStack
 
 # Load configuration
 config = pulumi.Config()
@@ -32,4 +33,10 @@ gke_nodepool_stack = GkeNodePoolStack(
     name=cluster_name,
     region=region,
     cluster_name=gke_cluster_stack.gke_cluster.name
+)
+
+gke_bastion_host = GkeBastionHostStack(
+    vpc_id=network_stack.vpc.id,
+    region=region,
+    public_subnet_id=network_stack.public_subnet.id,
 )
