@@ -25,48 +25,59 @@ This repository is a Pulumi-based infrastructure-as-code (IaC) project for deplo
    ```bash
    pip install -r requirements.txt
 
-# Notes: Commands needed for github actions service account
+# Setup for GitHub Actions with GCP IAM and GKE
 
+## 1. Set Project and Enable Required Services
+
+```bash
+export PROJECT_ID=yukaringermany-gke
+
+gcloud services enable \
+    iap.googleapis.com \
+    container.googleapis.com \
+    cloudresourcemanager.googleapis.com \
+    --project="${PROJECT_ID}"
 ```
-export PROJECT_ID=yukaringermany-gke 
 
-gcloud services enable iap.googleapis.com
-
+## 2. Create Workload Identity Pool and OIDC Provider
+```bash
 gcloud iam workload-identity-pools create "githuboauthpool" \
     --project="${PROJECT_ID}" \
-    --location="global" 
-          
+    --location="global"
+
 gcloud iam workload-identity-pools providers create-oidc "githuboauth-provider" \
     --project="${PROJECT_ID}" \
     --location="global" \
     --workload-identity-pool="githuboauthpool" \
-    --display-name="githuboauth-provider" \
+    --display-name="GitHub OIDC Provider" \
     --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository,attribute.actor=assertion.actor,attribute.aud=assertion.aud" \
     --issuer-uri="https://token.actions.githubusercontent.com" \
-    --attribute-condition="assertion.repository == 'qcserestipy/gke-pulumi'"  
+    --attribute-condition="assertion.repository == 'qcserestipy/gke-pulumi'"
+```
 
+## 3. Create Service Account for GitHub Actions
+```bash
 gcloud iam service-accounts create githubactions \
     --project="${PROJECT_ID}" \
-    --display-name="Service account for GitHub Actions"   
+    --display-name="Service account for GitHub Actions"
+```
 
+## 4. Assign IAM Roles to the Service Account
+```bash
+# Workload Identity User
 gcloud iam service-accounts add-iam-policy-binding "githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
     --project="${PROJECT_ID}" \
     --role="roles/iam.workloadIdentityUser" \
     --member="principalSet://iam.googleapis.com/projects/619157711315/locations/global/workloadIdentityPools/githuboauthpool/attribute.repository/qcserestipy/gke-pulumi"
 
-gcloud services enable container.googleapis.com --project=${PROJECT_ID}
-
-gcloud projects add-iam-policy-binding ${PROJECT_ID} \ 
+# Assign necessary roles
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
     --role="roles/container.admin"
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
-   --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
-   --role="roles/compute.networkAdmin"
-
-gcloud projects add-iam-policy-binding ${PROJECT_ID} \
-   --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
-   --role="roles/container.admin"
+    --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/compute.networkAdmin"
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
@@ -74,19 +85,28 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
-    --role="roles/iam.serviceAccountUser" \
-    --condition=None
-
-gcloud services enable cloudresourcemanager.googleapis.com --project yukaringermany-gke
+    --role="roles/iam.serviceAccountUser"
 
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
-   --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
-   --role="roles/iam.serviceAccountAdmin"
+    --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/iam.serviceAccountAdmin"
 
-gcloud projects add-iam-policy-binding ${PROJECT_ID} \                                 
-   --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \ 
-   --role="roles/resourcemanager.projectIamAdmin"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/resourcemanager.projectIamAdmin"
 
-gcloud container clusters get-credentials yukaringermany-gke --region us-central1 --project yukaringermany-gke
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/compute.instanceAdmin.v1"
 
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/compute.storageAdmin"
+```
+
+## 5. Get GKE Cluster Credentials
+```bash
+gcloud container clusters get-credentials yukaringermany-gke \
+    --region us-central1 \
+    --project "${PROJECT_ID}"
 ```
