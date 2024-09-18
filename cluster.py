@@ -19,7 +19,7 @@ class GkeClusterStack:
             network=vpc_id,
             subnetwork=private_subnet_id,
             remove_default_node_pool=True,
-            initial_node_count=0
+            initial_node_count=1
         )
 
         pulumi.export("clusterName", self.gke_cluster.name)
