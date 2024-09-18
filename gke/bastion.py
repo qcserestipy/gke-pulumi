@@ -36,7 +36,7 @@ class GkeBastionHostStack:
         # Create the bastion host and associate the service account
         self.bastion_host = gcp.compute.Instance(
             name,
-            zone=region,
+            zone=f"{region}-a",
             machine_type=machine_type,
             boot_disk=gcp.compute.InstanceBootDiskArgs(
                 initialize_params=gcp.compute.InstanceBootDiskInitializeParamsArgs(

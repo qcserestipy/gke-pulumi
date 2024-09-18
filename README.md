@@ -77,6 +77,8 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --role="roles/iam.serviceAccountUser" \
     --condition=None
 
+gcloud services enable cloudresourcemanager.googleapis.com --project yukaringermany-gke
+
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
    --member="serviceAccount:githubactions@${PROJECT_ID}.iam.gserviceaccount.com" \
    --role="roles/iam.serviceAccountAdmin"
