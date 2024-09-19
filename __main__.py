@@ -1,7 +1,7 @@
 import pulumi
 from pulumi_gcp import container
 from gke.network import NetworkStack
-from gke.cluster import GkeClusterStack
+from gke.cluster import GkeClusterStack 
 from gke.compute import GkeNodePoolStack
 from gke.bastion import GkeBastionHostStack
 
@@ -25,7 +25,7 @@ gke_cluster_stack = GkeClusterStack(
     name=cluster_name,
     region=region,
     vpc_id=network_stack.vpc.id,
-    private_subnet_id=network_stack.private_subnet.id,
+    private_subnet=network_stack.private_subnet,
     gke_version=latest_engine_version
 )
 

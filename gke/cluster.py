@@ -1,5 +1,5 @@
 import pulumi
-from pulumi_gcp import container
+from pulumi_gcp import container, compute
 
 class GkeClusterStack:
     def __init__(
@@ -7,7 +7,7 @@ class GkeClusterStack:
         name: str, 
         region: str, 
         vpc_id: str, 
-        private_subnet_id: str,
+        private_subnet: compute.Subnetwork,
         gke_version: str
     ):
 
@@ -17,7 +17,7 @@ class GkeClusterStack:
             location=region,
             min_master_version=gke_version,
             network=vpc_id,
-            subnetwork=private_subnet_id,
+            subnetwork=private_subnet.id,
             remove_default_node_pool=True,
             deletion_protection=False,
             initial_node_count=1,
@@ -29,9 +29,8 @@ class GkeClusterStack:
             master_authorized_networks_config=container.ClusterMasterAuthorizedNetworksConfigArgs(
                 cidr_blocks=[
                     container.ClusterMasterAuthorizedNetworksConfigCidrBlockArgs(
-                        cidr_block="10.0.0.0/8",  # Change this to restrict access, such as to a trusted IP range
-                        display_name="Allow Me", 
-                        
+                        cidr_block=private_subnet.ip_cidr_range,
+                        display_name="Allow VPC Traffic", 
                     )
                 ],
             ),
