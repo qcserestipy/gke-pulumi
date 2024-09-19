@@ -49,13 +49,6 @@ class GkeBastionHostStack:
                     image=image,
                 ),
             ),
-            # network_interfaces=[
-            #     gcp.compute.InstanceNetworkInterfaceArgs(
-            #         network=vpc_id,
-            #         subnetwork=public_subnet_id,
-            #         access_configs=[gcp.compute.InstanceNetworkInterfaceAccessConfigArgs()],
-            #     )
-            # ],
             network_interfaces=[
                 gcp.compute.InstanceNetworkInterfaceArgs(
                     network=vpc_id,
@@ -81,35 +74,4 @@ class GkeBastionHostStack:
                 sudo service tinyproxy restart
             """,
             tags=[bastion_host_tag],
-        )
-
-        # Create firewall rule to allow ingress from IAP IP range
-        self.iap_firewall_rule = gcp.compute.Firewall(
-            f"{name}-allow-ingress-from-iap",
-            network=vpc_id,
-            allows=[
-                gcp.compute.FirewallAllowArgs(
-                    protocol="tcp",
-                    ports=["22"],  # Allow SSH
-                ),
-            ],
-            direction="INGRESS",
-            source_ranges=["35.235.240.0/20"],  # IAP IP range
-            target_tags=[bastion_host_tag],  # Optional: apply to specific instances
-            description="Allow ingress from IAP for SSH access"
-        )
-
-        # Create firewall rule to allow egress (outbound) traffic to the internet
-        self.egress_firewall_rule = gcp.compute.Firewall(
-            f"{name}-allow-egress",
-            network=vpc_id,
-            allows=[
-                gcp.compute.FirewallAllowArgs(
-                    protocol="all",  # Allow all protocols
-                ),
-            ],
-            direction="EGRESS",
-            destination_ranges=["0.0.0.0/0"],  # Allow all outbound traffic
-            target_tags=[bastion_host_tag],  # Apply to bastion host instances
-            description="Allow egress traffic to the internet for bastion host"
         )
