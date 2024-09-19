@@ -16,7 +16,7 @@ class NetworkStack:
             region=region,
             network=self.vpc.id,
             description="Public Subnet for GKE",
-            purpose="PRIVATE_RFC_1918"
+            # purpose="PRIVATE_RFC_1918"
         )
 
         self.private_subnet = compute.Subnetwork(
@@ -25,7 +25,7 @@ class NetworkStack:
             region=region,
             network=self.vpc.id,
             description="Private Subnet for GKE",
-            purpose="PRIVATE_NAT",
+            # purpose="PRIVATE_NAT",
             private_ip_google_access=True,
         )
 
