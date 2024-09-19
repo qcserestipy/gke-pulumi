@@ -32,7 +32,8 @@ gke_cluster_stack = GkeClusterStack(
 gke_nodepool_stack = GkeNodePoolStack(
     name=cluster_name,
     region=region,
-    cluster_name=gke_cluster_stack.gke_cluster.name
+    cluster_name=gke_cluster_stack.gke_cluster.name,
+    machine_type='e2-small'
 )
 
 gke_bastion_host = GkeBastionHostStack(
