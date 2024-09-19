@@ -40,3 +40,27 @@ gke_bastion_host = GkeBastionHostStack(
     region=region,
     private_subnet_id=network_stack.private_subnet.id,
 )
+
+
+from pulumi_kubernetes.apps.v1 import Deployment
+
+deployment = Deployment(
+    "nginx-deployment",
+    spec={
+        "selector": {"matchLabels": {"app": "nginx"}},
+        "replicas": 2,
+        "template": {
+            "metadata": {"labels": {"app": "nginx"}},
+            "spec": {
+                "containers": [
+                    {
+                        "name": "nginx",
+                        "image": "nginx",
+                        "ports": [{"containerPort": 80}],
+                    }
+                ]
+            },
+        },
+    },
+    opts=pulumi.ResourceOptions(provider=gke_cluster_stack.k8s_provider)
+)

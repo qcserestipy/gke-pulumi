@@ -10,3 +10,4 @@ dependencies:
       - pulumi
       - pulumi-gcp
       - pulumi-docker
+      - pulumi-kubernetes

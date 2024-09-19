@@ -1,5 +1,6 @@
 import pulumi
-from pulumi_gcp import container, compute
+from pulumi_gcp import container, compute, config as gcp_config
+import pulumi_kubernetes as k8s
 
 class GkeClusterStack:
     def __init__(
@@ -10,7 +11,6 @@ class GkeClusterStack:
         private_subnet: compute.Subnetwork,
         gke_version: str
     ):
-
         self.gke_cluster = container.Cluster(
             f"{name}-cluster",
             name=name,
@@ -34,6 +34,56 @@ class GkeClusterStack:
                     )
                 ],
             ),
+            # Request sensitive info
+            master_auth=container.ClusterMasterAuthArgs(
+                client_certificate_config=container.ClusterMasterAuthClientCertificateConfigArgs(
+                    issue_client_certificate=True  # Ensure sensitive fields are returned
+                )
+            ),
         )
+
+        # Create the Kubernetes provider using the kubeconfig
+        self.k8s_provider = k8s.Provider(f"{name}-provider", kubeconfig=self.generate_kubeconfig())
+
         pulumi.export("clusterName", self.gke_cluster.name)
         pulumi.export("clusterEndpoint", self.gke_cluster.endpoint)
+
+    def generate_kubeconfig(self):
+        """Create kubeconfig to access the cluster."""
+        return pulumi.Output.all(self.gke_cluster.name, self.gke_cluster.endpoint, self.gke_cluster.master_auth).apply(
+            lambda args: self.create_kubeconfig(*args)
+        )
+
+    def create_kubeconfig(self, name, endpoint, master_auth):
+        """Generate kubeconfig string for the cluster."""
+        ca_cert = master_auth.get('clusterCaCertificate', None)
+
+        if not ca_cert:
+            raise ValueError("Failed to retrieve cluster CA certificate from master_auth")
+
+        context = f"{gcp_config.project}_{gcp_config.zone}_{name}"
+        return f"""
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: {ca_cert}
+    server: https://{endpoint}
+  name: {context}
+contexts:
+- context:
+    cluster: {context}
+    user: {context}
+  name: {context}
+current-context: {context}
+kind: Config
+preferences: {{}}
+users:
+- name: {context}
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      command: gke-gcloud-auth-plugin
+      installHint: Install gke-gcloud-auth-plugin for use with kubectl by following
+        https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+      provideClusterInfo: true
+"""
