@@ -105,15 +105,7 @@ class GkeBastionHostStack:
             network=vpc_id,
             allows=[
                 gcp.compute.FirewallAllowArgs(
-                    protocol="tcp",  # You can also specify "all" if you want to allow all protocols
-                    ports=["0-65535"],  # Allow all TCP ports
-                ),
-                gcp.compute.FirewallAllowArgs(
-                    protocol="udp",  # Allow all UDP ports
-                    ports=["0-65535"],
-                ),
-                gcp.compute.FirewallAllowArgs(
-                    protocol="icmp",  # Allow ICMP traffic (optional, useful for ping)
+                    protocol="all",  # Allow all protocols
                 ),
             ],
             direction="EGRESS",

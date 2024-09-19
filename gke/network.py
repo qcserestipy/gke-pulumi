@@ -29,6 +29,22 @@ class NetworkStack:
             private_ip_google_access=True,
         )
 
+        # Create a Cloud Router
+        self.router = compute.Router(
+            f"{name}-router",
+            network=self.vpc.id,
+            region=region,
+        )
+
+        # Create a Cloud NAT
+        self.nat = compute.RouterNat(
+            f"{name}-nat",
+            router=self.router.name,
+            region=region,
+            nat_ips=[],
+            source_subnetwork_ip_ranges_to_nat="ALL_SUBNETWORKS_ALL_IP_RANGES",
+        )
+
         # Export the VPC and subnet IDs
         pulumi.export("vpcId", self.vpc.id)
         pulumi.export("publicSubnetId", self.public_subnet.id)
