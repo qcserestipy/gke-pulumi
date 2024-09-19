@@ -1,4 +1,4 @@
 config:
   gcp:project: yukaringermany-gke
   yukaringermany-gke:cluster_name: yukaringermany-gke
-  yukaringermany-gke:cluster_region: us-central1
+  yukaringermany-gke:cluster_region: europe-west10
