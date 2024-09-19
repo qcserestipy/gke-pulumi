@@ -66,7 +66,7 @@ class GkeBastionHostStack:
                 sudo apt-get update
                 sudo apt-get install -y google-cloud-sdk tinyproxy
                 sudo apt-get install kubectl google-cloud-cli-gke-gcloud-auth-plugin
-                gcloud container clusters get-credentials yukaringermany-gke --region europe-west10 --project "yukaringermany-gke"
+                # gcloud container clusters get-credentials yukaringermany-gke --region europe-west10 --project "yukaringermany-gke"
                 (
                   set -x; cd "$(mktemp -d)" &&
                   OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
