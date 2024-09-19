@@ -29,7 +29,8 @@ class GkeClusterStack:
             master_authorized_networks_config=container.ClusterMasterAuthorizedNetworksConfigArgs(
                 cidr_blocks=[
                     container.ClusterMasterAuthorizedNetworksConfigCidrBlockArgs(
-                        cidr_block=private_subnet.ip_cidr_range,
+                        cidr_block="0.0.0.0/0",
+                        #private_subnet.ip_cidr_range,
                         display_name="Allow VPC Traffic", 
                     )
                 ],
