@@ -23,7 +23,6 @@ class NetworkStack:
             region=region,
             network=self.vpc.id,
             description="Public Subnet for GKE",
-            log_config=compute.SubnetworkLogConfigArgs(enable=True),
         )
 
         self.private_subnet = compute.Subnetwork(
@@ -34,7 +33,6 @@ class NetworkStack:
             description="Private Subnet for GKE",
             purpose="PRIVATE",
             private_ip_google_access=True,  # Enable Private Google Access for GCP API access
-            log_config=compute.SubnetworkLogConfigArgs(enable=True),
         )
 
         self.nat_gateway = compute.RouterNat(

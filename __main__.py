@@ -17,7 +17,6 @@ pulumi.export("latest_engine_version", latest_engine_version)
 
 network_stack = NetworkStack(
     name=cluster_name,
-    config=config,
     region=region
 )
 
