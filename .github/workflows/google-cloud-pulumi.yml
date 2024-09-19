@@ -38,12 +38,18 @@ jobs:
       # Step 3a: Install Google Cloud SDK
       - name: 'Install Google Cloud SDK and GKE Auth Plugin'
         run: |
+          # Update the package list
+          sudo apt-get update -y
+          sudo apt-get install apt-transport-https ca-certificates gnupg curl -y
+          
+          # Import Google Cloud public key
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+          
+          # Add Google Cloud SDK repository
           echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-          sudo apt-get install apt-transport-https ca-certificates gnupg -y
-          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg
-          # Fix missing GPG key error
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C0BA5CE6DC6315A3
-          sudo apt-get update && sudo apt-get install google-cloud-sdk google-cloud-cli-gke-gcloud-auth-plugin -y
+          
+          # Install Google Cloud CLI and GKE Auth Plugin
+          sudo apt-get update -y && sudo apt-get install google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin -y 
 
       # Step 4: Install dependencies (for Python or any other package management)
       - name: 'Install Python Dependencies'
