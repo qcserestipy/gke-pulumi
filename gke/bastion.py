@@ -69,22 +69,22 @@ class GkeBastionHostStack:
                 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl                
                 # gcloud container clusters get-credentials yukaringermany-gke --region europe-west10 --project "yukaringermany-gke"
-                set -x; cd "$(mktemp -d)" \
+                cd "$(mktemp -d)" \
                     && OS="$(uname | tr '[:upper:]' '[:lower:]')" \
                     && ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" \
                     && KREW="krew-${OS}_${ARCH}" \
                     && curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" \
                     && tar zxvf "${KREW}.tar.gz" \
                     && ./"${KREW}" install krew
-                export PATH=\"${KREW_ROOT:-$HOME/.krew}/bin:$PATH\" >> ~/.bashrc
+                export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH" >> ~/.bashrc
 
-                . ~/.bashrc 
+                source ~/.bashrc 
                 kubectl krew install ns ctx
-                # echo 'alias kns=\"kubectl ns\"' >> ~/.bashrc
-                # echo 'alias kctx=\"kubectl ctx\"' >> ~/.bashrc
-                # echo 'alias k=\"kubectl\"' >> ~/.bashrc
-                # echo 'source <(kubectl completion bash)' >> ~/.bashrc
-                # echo 'complete -F __start_kubectl k' >> ~/.bashrc
+                echo 'alias kns="kubectl ns"' >> ~/.bashrc
+                echo 'alias kctx="kubectl ctx"' >> ~/.bashrc
+                echo 'alias k="kubectl"' >> ~/.bashrc
+                echo 'source <(kubectl completion bash)' >> ~/.bashrc
+                echo 'complete -F __start_kubectl k' >> ~/.bashrc
 
                 # # Configure Tinyproxy
                 # sudo sed -i 's/^Port .*/Port 8888/' /etc/tinyproxy/tinyproxy.conf  # Ensure port 8888
