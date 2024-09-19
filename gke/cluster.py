@@ -57,10 +57,9 @@ class GkeClusterStack:
     def create_kubeconfig(self, name, endpoint, master_auth):
         """Generate kubeconfig string for the cluster."""
         ca_cert = master_auth.get('clusterCaCertificate', None)
-
+        
         if not ca_cert:
-            raise ValueError("Failed to retrieve cluster CA certificate from master_auth")
-
+            raise ValueError(f"Failed to retrieve cluster CA certificate from master_auth. Content of master_auth: {master_auth}")
         context = f"{gcp_config.project}_{gcp_config.zone}_{name}"
         return f"""
 apiVersion: v1
