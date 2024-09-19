@@ -47,21 +47,6 @@ class NetworkStack:
             ),
         )
 
-        self.iap_firewall_rule = compute.Firewall(
-            f"{name}-allow-ingress-from-iap",
-            network=self.vpc.id,
-            allows=[
-                compute.FirewallAllowArgs(
-                    protocol="tcp",
-                    ports=["22"],  # Allow SSH
-                ),
-            ],
-            direction="INGRESS",
-            source_ranges=["35.235.240.0/20"],  # IAP IP range
-            target_tags=["bastion-host"],  # Apply to instances with 'bastion-host' tag
-            description="Allow ingress from IAP for SSH access",
-        )
-
         self.egress_firewall_rule = compute.Firewall(
             f"{name}-allow-egress",
             network=self.vpc.id,

@@ -75,3 +75,18 @@ class GkeBastionHostStack:
             """,
             tags=[bastion_host_tag],
         )
+
+        self.iap_firewall_rule = gcp.compute.Firewall(
+            f"{name}-allow-ingress-from-iap",
+            network=vpc_id,
+            allows=[
+                gcp.compute.FirewallAllowArgs(
+                    protocol="tcp",
+                    ports=["22"],  # Allow SSH
+                ),
+            ],
+            direction="INGRESS",
+            source_ranges=["35.235.240.0/20"],  # IAP IP range
+            target_tags=[bastion_host_tag],  # Apply to instances with 'bastion-host' tag
+            description="Allow ingress from IAP for SSH access",
+        )
