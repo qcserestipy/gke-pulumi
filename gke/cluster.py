@@ -35,6 +35,5 @@ class GkeClusterStack:
                 ],
             ),
         )
-
         pulumi.export("clusterName", self.gke_cluster.name)
         pulumi.export("clusterEndpoint", self.gke_cluster.endpoint)
