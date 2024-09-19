@@ -23,18 +23,18 @@ class GkeClusterStack:
             initial_node_count=1,
             private_cluster_config=container.ClusterPrivateClusterConfigArgs(
                 enable_private_nodes=True,
-                enable_private_endpoint=False,
+                enable_private_endpoint=True,
                 master_ipv4_cidr_block="10.0.0.0/28"
             ),
-            # master_authorized_networks_config=container.ClusterMasterAuthorizedNetworksConfigArgs(
-            #     cidr_blocks=[
-            #         container.ClusterMasterAuthorizedNetworksConfigCidrBlockArgs(
-            #             cidr_block="93.203.225.76/32",  # Change this to restrict access, such as to a trusted IP range
-            #             display_name="Allow Me", 
+            master_authorized_networks_config=container.ClusterMasterAuthorizedNetworksConfigArgs(
+                cidr_blocks=[
+                    container.ClusterMasterAuthorizedNetworksConfigCidrBlockArgs(
+                        cidr_block="10.0.0.0/8",  # Change this to restrict access, such as to a trusted IP range
+                        display_name="Allow Me", 
                         
-            #         )
-            #     ],
-            # ),
+                    )
+                ],
+            ),
         )
 
         pulumi.export("clusterName", self.gke_cluster.name)
