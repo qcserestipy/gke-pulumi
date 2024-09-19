@@ -75,8 +75,8 @@ class GkeBastionHostStack:
                   tar zxvf "${KREW}.tar.gz" &&
                   ./"${KREW}" install krew
                 )
+                export PATH=\"${KREW_ROOT:-$HOME/.krew}/bin:$PATH\" >> ~/.bashrc
                 kubectl krew install ns ctx
-                echo 'export PATH=\"${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"' >> ~/.bashrc
                 echo 'alias kns=\"kubectl ns\"' >> ~/.bashrc
                 echo 'alias kctx=\"kubectl ctx\"' >> ~/.bashrc
                 echo 'alias k=\"kubectl\"' >> ~/.bashrc
