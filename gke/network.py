@@ -25,7 +25,7 @@ class NetworkStack:
             region=region,
             network=self.vpc.id,
             description="Private Subnet for GKE",
-            # purpose="PRIVATE_NAT",
+            purpose="PRIVATE_NAT",
             private_ip_google_access=True,
         )
 
@@ -36,12 +36,12 @@ class NetworkStack:
             region=region,
         )
 
-        # Create a Cloud NAT
+        # Create Cloud NAT Gateway
         self.nat = compute.RouterNat(
-            f"{name}-nat",
+            f"{name}-nat-gateway",
             router=self.router.name,
             region=region,
-            nat_ips=[],
+            nat_ip_allocate_option="AUTO_ONLY",
             source_subnetwork_ip_ranges_to_nat="ALL_SUBNETWORKS_ALL_IP_RANGES",
         )
 
