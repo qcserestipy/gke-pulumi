@@ -98,3 +98,26 @@ class GkeBastionHostStack:
             target_tags=[bastion_host_tag],  # Optional: apply to specific instances
             description="Allow ingress from IAP for SSH access"
         )
+
+        # Create firewall rule to allow egress (outbound) traffic to the internet
+        self.egress_firewall_rule = gcp.compute.Firewall(
+            f"{name}-allow-egress",
+            network=vpc_id,
+            allows=[
+                gcp.compute.FirewallAllowArgs(
+                    protocol="tcp",  # You can also specify "all" if you want to allow all protocols
+                    ports=["0-65535"],  # Allow all TCP ports
+                ),
+                gcp.compute.FirewallAllowArgs(
+                    protocol="udp",  # Allow all UDP ports
+                    ports=["0-65535"],
+                ),
+                gcp.compute.FirewallAllowArgs(
+                    protocol="icmp",  # Allow ICMP traffic (optional, useful for ping)
+                ),
+            ],
+            direction="EGRESS",
+            destination_ranges=["0.0.0.0/0"],  # Allow all outbound traffic
+            target_tags=[bastion_host_tag],  # Apply to bastion host instances
+            description="Allow egress traffic to the internet for bastion host"
+        )
