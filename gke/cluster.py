@@ -23,7 +23,7 @@ class GkeClusterStack:
             initial_node_count=1,
             private_cluster_config=container.ClusterPrivateClusterConfigArgs(
                 enable_private_nodes=True,
-                enable_private_endpoint=True,
+                enable_private_endpoint=False,
                 master_ipv4_cidr_block="10.0.0.0/28"
             ),
             master_authorized_networks_config=container.ClusterMasterAuthorizedNetworksConfigArgs(
