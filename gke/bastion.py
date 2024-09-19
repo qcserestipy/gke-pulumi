@@ -24,20 +24,20 @@ class GkeBastionHostStack:
             display_name="GKE Bastion Host Service Account",
         )
 
-        # # Grant roles to the service account
-        # self.viewer_role_binding = gcp.projects.IAMMember(
-        #     f"{name}-viewer-role-binding",
-        #     project=gcp.config.project,
-        #     role="roles/container.clusterViewer",  # Allows viewing cluster details
-        #     member=self.service_account.email.apply(lambda email: f"serviceAccount:{email}"),
-        # )
+        # Grant roles to the service account
+        self.viewer_role_binding = gcp.projects.IAMMember(
+            f"{name}-viewer-role-binding",
+            project=gcp.config.project,
+            role="roles/container.clusterViewer",  # Allows viewing cluster details
+            member=self.service_account.email.apply(lambda email: f"serviceAccount:{email}"),
+        )
 
-        # self.admin_role_binding = gcp.projects.IAMMember(
-        #     f"{name}-admin-role-binding",
-        #     project=gcp.config.project,
-        #     role="roles/container.admin",  # Allows administrative access to the cluster
-        #     member=self.service_account.email.apply(lambda email: f"serviceAccount:{email}"),
-        # )        
+        self.admin_role_binding = gcp.projects.IAMMember(
+            f"{name}-admin-role-binding",
+            project=gcp.config.project,
+            role="roles/container.admin",  # Allows administrative access to the cluster
+            member=self.service_account.email.apply(lambda email: f"serviceAccount:{email}"),
+        )        
 
         # Create the bastion host and associate the service account
         self.bastion_host = gcp.compute.Instance(
