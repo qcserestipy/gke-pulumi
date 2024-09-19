@@ -81,6 +81,22 @@ class NetworkStack:
             description="Allow internal communication between nodes",
         )
 
+        # Firewall rule for GitHub Actions runner to access GKE API endpoint
+        self.github_runner_firewall_rule = compute.Firewall(
+            f"{name}-allow-github-actions-access",
+            network=self.vpc.id,
+            allows=[
+                compute.FirewallAllowArgs(
+                    protocol="tcp",
+                    ports=["443"],  # GKE API server uses HTTPS (port 443)
+                ),
+            ],
+            direction="INGRESS",
+            source_ranges=["0.0.0.0/0"],
+            description="Allow GitHub Actions runners to access GKE API endpoint",
+            priority=1000,
+        )
+
         # Export the VPC and subnet IDs for use in other stacks
         pulumi.export("vpcId", self.vpc.id)
         pulumi.export("publicSubnetId", self.public_subnet.id)
