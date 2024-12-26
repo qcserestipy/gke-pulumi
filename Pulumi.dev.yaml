@@ -1,7 +1,7 @@
 config:
   gcp:project: yukaringermany-gke
   yukaringermany-gke:cluster_name: yukaringermany-gke
-  yukaringermany-gke:cluster_region: europe-west1
+  yukaringermany-gke:cluster_region: europe-west3
   yukaringermany-gke:dbPassword:
     secure: AAABAJPsh8UUBla5l3+lvFQ1EiKswiBk06v2zFLkyPQ0AHypqkkYXfCD2vRi
   yukaringermany-gke:dbUser:
