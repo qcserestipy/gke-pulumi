@@ -71,6 +71,7 @@ moodle_stack = MoodleStack(
     name="moodle",
     region=region,
     vpc=network_stack.vpc,
+    vpc_peering=network_stack.vpc_peering,
     k8s_provider=gke_cluster_stack.k8s_provider,
     cluster_name=gke_cluster_stack.gke_cluster.name
 )

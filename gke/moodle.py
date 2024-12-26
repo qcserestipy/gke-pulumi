@@ -9,6 +9,7 @@ class MoodleStack:
         name: str,
         region: str,
         vpc,
+        vpc_peering,
         k8s_provider: k8s.Provider,
         cluster_name: pulumi.Output[str],
     ):
@@ -21,7 +22,7 @@ class MoodleStack:
         self.moodle_filestore = gcp.filestore.Instance(
             f"{name}-filestore",
             tier="BASIC_HDD",
-            location=region,
+            location=f"{region}-a",
             file_shares={
                 "name": "moodle",
                 "capacityGb": 1024,
@@ -63,6 +64,7 @@ class MoodleStack:
                     "private_network": vpc.self_link,
                 },
             },
+            opts=pulumi.ResourceOptions(depends_on=[vpc_peering])
         )
         # Create the actual database
         self.moodle_db = gcp.sql.Database(
