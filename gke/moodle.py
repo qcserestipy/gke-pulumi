@@ -45,7 +45,7 @@ class MoodleStack:
             tier="STANDARD_HA",
             memory_size_gb=1,
             region=region,
-            redis_version="REDIS_6_X",
+            redis_version="REDIS_7_2",
             transit_encryption_mode="SERVER_AUTHENTICATION",  # Optional, for TLS
             authorized_network=vpc.id,
         )

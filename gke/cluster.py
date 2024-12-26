@@ -48,6 +48,7 @@ class GkeClusterStack:
 
         pulumi.export("clusterName", self.gke_cluster.name)
         pulumi.export("clusterEndpoint", self.gke_cluster.endpoint)
+        pulumi.export("debugMasterAuth", self.gke_cluster.master_auth)
 
     def generate_kubeconfig(self):
         """Create kubeconfig to access the cluster."""
