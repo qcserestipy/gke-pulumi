@@ -43,8 +43,8 @@ class GkeClusterStack:
             ),
         )
 
-        # # Create the Kubernetes provider using the kubeconfig
-        # self.k8s_provider = k8s.Provider(f"{name}-provider", kubeconfig=self.generate_kubeconfig())
+        # Create the Kubernetes provider using the kubeconfig
+        self.k8s_provider = k8s.Provider(f"{name}-provider", kubeconfig=self.generate_kubeconfig())
 
         pulumi.export("clusterName", self.gke_cluster.name)
         pulumi.export("clusterEndpoint", self.gke_cluster.endpoint)
