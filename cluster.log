@@ -1,0 +1,216 @@
+addonsConfig:
+  gcePersistentDiskCsiDriverConfig:
+    enabled: true
+  kubernetesDashboard:
+    disabled: true
+  networkPolicyConfig:
+    disabled: true
+autopilot: {}
+autoscaling:
+  autoscalingProfile: BALANCED
+binaryAuthorization: {}
+clusterIpv4Cidr: 10.56.0.0/14
+controlPlaneEndpointsConfig:
+  dnsEndpointConfig:
+    allowExternalTraffic: false
+    endpoint: gke-753373bab3a84fd1be0f106998e6fbedb800-619157711315.europe-west3.gke.goog
+  ipEndpointsConfig:
+    authorizedNetworksConfig:
+      cidrBlocks:
+      - cidrBlock: 0.0.0.0/0
+        displayName: Allow VPC Traffic
+      enabled: true
+      privateEndpointEnforcementEnabled: true
+    enablePublicEndpoint: true
+    enabled: true
+    privateEndpoint: 10.0.0.2
+    privateEndpointSubnetwork: projects/yukaringermany-gke/regions/europe-west3/subnetworks/gke-yukaringermany-gke-7802756a-pe-subnet
+    publicEndpoint: 35.246.221.83
+createTime: '2024-12-26T22:13:15+00:00'
+currentMasterVersion: 1.31.1-gke.2105000
+currentNodeCount: 3
+currentNodeVersion: 1.31.1-gke.2105000
+databaseEncryption:
+  currentState: CURRENT_STATE_DECRYPTED
+  state: DECRYPTED
+defaultMaxPodsConstraint:
+  maxPodsPerNode: '110'
+endpoint: 35.246.221.83
+enterpriseConfig:
+  clusterTier: STANDARD
+etag: 55c6aaf9-331f-4dd6-a3bd-82cdadcf2205
+id: 753373bab3a84fd1be0f106998e6fbedb8000b75b1f34feb8487c6dc27e439c2
+initialClusterVersion: 1.31.1-gke.2105000
+initialNodeCount: 1
+instanceGroupUrls:
+- https://www.googleapis.com/compute/v1/projects/yukaringermany-gke/zones/europe-west3-b/instanceGroupManagers/gke-yukaringermany-g-yukaringermany-g-2752567b-grp
+- https://www.googleapis.com/compute/v1/projects/yukaringermany-gke/zones/europe-west3-a/instanceGroupManagers/gke-yukaringermany-g-yukaringermany-g-06e697e1-grp
+- https://www.googleapis.com/compute/v1/projects/yukaringermany-gke/zones/europe-west3-c/instanceGroupManagers/gke-yukaringermany-g-yukaringermany-g-8c4f6283-grp
+ipAllocationPolicy:
+  clusterIpv4Cidr: 10.56.0.0/14
+  clusterIpv4CidrBlock: 10.56.0.0/14
+  clusterSecondaryRangeName: gke-yukaringermany-gke-pods-753373ba
+  defaultPodIpv4RangeUtilization: 0.0029
+  podCidrOverprovisionConfig: {}
+  servicesIpv4Cidr: 34.118.224.0/20
+  servicesIpv4CidrBlock: 34.118.224.0/20
+  stackType: IPV4
+  useIpAliases: true
+labelFingerprint: bb92da99
+legacyAbac: {}
+location: europe-west3
+locations:
+- europe-west3-b
+- europe-west3-a
+- europe-west3-c
+loggingConfig:
+  componentConfig:
+    enableComponents:
+    - SYSTEM_COMPONENTS
+    - WORKLOADS
+loggingService: logging.googleapis.com/kubernetes
+maintenancePolicy:
+  resourceVersion: e3b0c442
+masterAuth:
+  clientCertificate: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURvVENDQWdtZ0F3SUJBZ0lSQUx4L1lsQ2szK2tkUnh3N0RXYmJNTlV3RFFZSktvWklodmNOQVFFTEJRQXcKTHpFdE1Dc0dBMVVFQXhNa056RXdPRGRsWTJFdE5tVXdNUzAwWXpVMkxXSTJabVV0TUdWbU5tRTJNemRtWm1NeQpNQjRYRFRJME1USXlOakl5TVRFeE5sb1hEVEk1TVRJeU5USXlNVE14Tmxvd0VURVBNQTBHQTFVRUF4TUdZMnhwClpXNTBNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXlXNVhlNFRucms0RG43Z00KUFUvN3p1TFR6TE1GT0ZyM1VWNEs2d1MrTVRicDg3ZEN6aDZuR0VRU3QyNzVFZStCQnNrZjFKWWh0WW5ZQ2xaRQo3N08rQy9UaUtUUytNZE5XZ1BwVVVXMndJamJmQ1hCaTdoeEgvQ3JwVTVjMHUxeHAxcTNrcGd5Qk5nL1J6ZHlPCnh5bG83T3I4Unk4N00vSzNldzV3bDFQaGlyU1ltTmpqb0pPK3BhazRHSHlmMG1BMTNiS2ZNTVhxN09mM0Z1OW8KaVh1ZXNtenovK2JXeUtGK01xeFEwU3cyZng1cFNndVl6UmZLRGtKZ3Q4aVZDRlFSVjRZdkI4ODFSTnVQNkFFUQpMTjhnZDhNZ3Q5c09jeWU4SUNGT25yNmRvVjdxWHA4WENicVl0WjAvdjc3MVFSSi9VcUFmLzVBcVQ5QlJVc1phCjdlSTY5d0lEQVFBQm8xWXdWREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JRYzBNbkF3dmc3b0hCeDRnTEo4YUx0cGZyVwpNVEFOQmdrcWhraUc5dzBCQVFzRkFBT0NBWUVBa0taRXZDUU81VlQyRS9EY2xoUmtnWHozSm1pTWdmajVPUEZxCkxQa2N0Qk1oMklLTFRIYUpiWGQ1ZlNJT3U0MEJvek9kemV5RHRRYzhjVkNSWkwyZGE1U1ZIdkhYNURMamd1MzMKcjQ4TlFCNFZERXBubmxCSDNqbW9mZEk1VHhWR1o1OE5RRE1uQjRoZmYxcXlZZGg2ZE5GUUdVRWdaSCtWRy9yTApSMFdITkVvcWZuNzk5OFJML0pBWVdVcjZ3TVNLYnh4U2FTMmpoSUFuTTBLRGZDTU9DR1lXdTcvcWNzREtjY1dCCnBYV0J5ZEhDZ25FZEkrWlVBbDNERzJrVzFpOEFnajVrdGc0TkNFVHNVZ3p6TkljUHBpVHUxaWFJTTFaY003RzkKS1BTQ2t3S2d1MlREOGd2T2VIa3BsR0RxdS9EekhBaW1NaDh3OUczLys2Z0l5QmVYemVkMDM3UTZNMEVGbk9aQwpkQlNJOFZCdGFnZ3NabjVMUzIwSkxJZnZPdmtwaHZVVU4vRmhLR3RsdFFmL3ZheXR3L3N2Sm96TjlNNzBsUDF5Cm5hY2pRU1FCK2pGSTFsOUpad0pZbVovZ0hyQlpnNGYxU0wxUmxIZit6NmtHd3ZueUIzVXpZRVBXVnJleXI1S0wKOFNHaHY3TkFkREJVbW5YdUVaZk5lanZJSjdRYgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  clientCertificateConfig:
+    issueClientCertificate: true
+  clientKey: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBeVc1WGU0VG5yazREbjdnTVBVLzd6dUxUekxNRk9GcjNVVjRLNndTK01UYnA4N2RDCnpoNm5HRVFTdDI3NUVlK0JCc2tmMUpZaHRZbllDbFpFNzdPK0MvVGlLVFMrTWROV2dQcFVVVzJ3SWpiZkNYQmkKN2h4SC9DcnBVNWMwdTF4cDFxM2twZ3lCTmcvUnpkeU94eWxvN09yOFJ5ODdNL0szZXc1d2wxUGhpclNZbU5qagpvSk8rcGFrNEdIeWYwbUExM2JLZk1NWHE3T2YzRnU5b2lYdWVzbXp6LytiV3lLRitNcXhRMFN3MmZ4NXBTZ3VZCnpSZktEa0pndDhpVkNGUVJWNFl2Qjg4MVJOdVA2QUVRTE44Z2Q4TWd0OXNPY3llOElDRk9ucjZkb1Y3cVhwOFgKQ2JxWXRaMC92NzcxUVJKL1VxQWYvNUFxVDlCUlVzWmE3ZUk2OXdJREFRQUJBb0lCQUJZdlV1OUZ1Z2FXalF1ZwpSNmpSRUZpKzNyamkxcVpZVG5qbHRLb2h3WmpHQllwVUdzVjgxc1p6YU9SUEVwdUpGMXJaOSttQUI0SnBCaVJOClVCWmVZNFlKbUljVlNnVk8wMjR0SS9BNzluUXVPdTVkTkdncE1UeHl0WFFCYVV0aGFENit0RG9ka25XVDFIV3AKM3dmTVpjUUNOWHJabHRtbjE5Rnp5NjYvREU0c1Y3UUxhc2xLajRMa1laOVkyOHVneGY1Y0h6Zm9ndnBENDZzcgpMbjhEMHRUUzJ3bjZaTVdObWR0TndpYVRYVkRXaGZoTklzK1h4VDV0c0NvODM5S1RrSjhDMy91byt1bWdzOENwClRmUm5mWnRWNStQRDZYWGpIVXJIRDlqWVo5THgzYm5tbTBJQWg0THRWWWluWnF0SFpqdS9XRUlVZHI3VGttMlMKaHV4cWRqRUNnWUVBN3daNnV5T3JrUTY1NjlVZytDZlM0azlULy9XbFFDa0ExZ21YcmVZZnl1L2pGUjAzUWM3dQp4elRHVlVXdHpNSEhYRUlVMEowR016YWdoNW0rVHkwZkZhV3RONEhCVnQ0d3dHdEM3a3pYZndtSWRpaFpRb0hTClJhM0p4WG5FRGNEZ3pIOEYyeTlLeVVQUTU3VTdKR1E3dXZsZTY5VFJ2WVAwdVVDQm9tR1pleE1DZ1lFQTE3eGsKVE1mb09IWTg4NzlWVFNNd3MwYkxHRDR2OVJPSDNnMllwVFdLdUVrY2JMazFzT3pZaXg5a2pEenFsMFdjQ25MQQpRL0Q4NnZaMGtrSFRKN3FaWWdnZThYbXRjdzZDbk84ZkU3TGRXb25XOWZtUFgxbW9NMWpkT1VhNytZVTJQS3E5CnVUNGJOQjVyeVdUSHkyQnJMWUMxZHN0UDg2cW1Senk1VVlUSmVRMENnWUJETEh6OWJzN2VtMWJnMGlyTDB0VlAKU0tBQXhSWkY2OEFTWnV1N3NYcXAyN1RqMEN3aFVIaUdmMnhsdG9sYmkvSHRHWjBqNjUwOGMxTzJDQjBWdjBhSApIT0tMUU9vRzhiYWR2UWM0VlZ3U2xhbEdHNXpLTmhYVUF6MDdSRGMyN2tlKzhNdkNoNDNxOWlZVm1EY2d5UktJClAyRFB3aVdYcnlmdGtCVmVmek5WQlFLQmdBM3dBK0xaLzJ5Mlp0V3doTWhJLzdwMVZtV29qdHljZUdpbUpEaDQKTHhBYzJSTkZHK3prUUZFc3BBaFRYeXlLdUx3TUVkUFIyK1VxS3ZuUCt0NVVOZGlaZ2JaRUVDcWd3MXQwTDJQTQphSFNTOXlwSkJ6UTN6S0FVbTZZNXBhZEhMZXZaZEF4bHNNZzdOdWQ1OVZaMFVqaE1XbXprVWJRQ1VGL0Ywb3NyCnN3QjVBb0dBVkFQQ3pESmRXZENlTDZTeHVaaVZmUmJaTm16WDhmMFdRN3BQTVZEZ2pwVnBQTWxuUjlPVnRvZCsKMDd6NlpEd3JhczFZRlp1UHpHd3NuR3llUy9wSFhrUHN1Q0FRZXJhY29mSTI3eXJldmd5ZHZKOVQ2bWdFWlhaVAozWFVOTWdRZXIwem5xTWlSWFd3d0c1NEQyZkpxV2JRcDBQQi8vckVvNHBJSGVNTmtCUkE9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+  clusterCaCertificate: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRRVR1V3did0dadXZQcmFEVitIaFVPakFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRM01UQTROMlZqWVMwMlpUQXhMVFJqTlRZdFlqWm1aUzB3WldZMllUWXpOMlptWXpJdwpJQmNOTWpReE1qSTJNakV4TXpFMldoZ1BNakExTkRFeU1Ua3lNakV6TVRaYU1DOHhMVEFyQmdOVkJBTVRKRGN4Ck1EZzNaV05oTFRabE1ERXROR00xTmkxaU5tWmxMVEJsWmpaaE5qTTNabVpqTWpDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQU5aeGh2eWtadFROZWpJWDl2YXRxYUljSTBKSEYwbExrWlFsUnBSVgppeE5uSW9lZzZ4dVQ2VlBlVXUveUo1WkZ3enFsbkZNQzM4RWdENjVFZGI1dis2dnh2aVNDME1PbHpUbThMZkxwCnRFejVqUnF6dEJvY0QwYm12Z2ZndlFZWkNQZktzWTIvWkRLY1dwcjRzNk5DN0VXN1FuTDV1NSs1WXVwUlI3UkYKQmJCZlpkODltR21NS1pnUGVuYjlhRGsvOTd5U0xWOVE5RHNtRWM4SVpoL2h4NTV3RVQ3c0N2N1pyT0J2MkVSTQpKVk9lTFNDYVE3NHE2Q0h5NlpOQjJ4c1EvREIzdGNKYmtBMm5ZL3pLQVlqdk5nME45aTJCN0VxaWorZXZLSWI4CmtOazk2K2h0Umtwa3pxaDkyaEtTV05iblIzbW5aeVV5eE9GSi9vaEoyeEIrTTBXYSs4WFM2OWtHS2JLSW1SWEUKUENSR3BOd01VdWZ4SU9jZVNDbDZhRmNGT2Q5WUNWYmdBSUYycDMvblNua0REdVJhTnBlMmxsWmozNDB0U3ZxYQpVNENnSGJkak80WjVPSVJQNWROeUdPNHZTWTgyb1M5VHZxVHZnRnprMUwzTEJnU2svTTUzbmMweTRSM2FDbkRrClV3WnR6Uzlla3h2a2Y5a29tOHFaazdLV0xRSURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVITkRKd01MNE82QndjZUlDeWZHaTdhWDYxakV3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFKRGpmU1BuMzRmbk5NSXNYQWYxeldZZFhZZGFiQkozeFozczBDYXhOcko5CjFwZ3dxY0lQUkxYcURaeGtBV2MyT2V2aFR3NzJUMG9QaWlBOTRZVTZaVnhKNUN6cDdpNEVHUGdvR3pIdWhwNVAKekxMM0h1L0YvVE1ibWM1UUQ5YVByYjBFOENkdDNMZWQ4enhJdUpMd3BHaThPWEZ6QW9xQkt3YVBCTVlNTVlqVQpTcytneWtmWlZpbnd4MVA3ZkdPR3pmQkI5cjVYUjlteGJXTFVUaHBnUXV4aEs3emYwSGdvdU9tWGZ2WHhTdm1ZCnpweGtkbVF4azdkM0h0VEQ1cGVadE5GMFZzUXVCUlJaWDlWakdoUE1ISGlKNnpIRlRtTUZGSmlPRFV3SzZlcWgKb1grY2FHWTNGeENRcnJHSkEwdHlEWFJ0ZENCWDR3ckpmVGNhNDdnWGUwOUdDTzhsVVBWQ1pWSm9Oakx4ZVVGdwp4U0lndzlIQ1lsKzBhM1ZGMDVmQjVlcml3TGdtV1gzOVd4UXlCYmlhY0FUaHkwZkVObGNlYVVyandWK0lUMGtPClpUSnNVc2hlcnRyZkkzRVZicUJYdmtjbE5VV0Z4VUIxQmlrTE50Wnp4blF2c2YzQTBmcWlPUWVBVGYva2g3amUKRWdmZXZNTndiQWNKYWk2YlV5ZEdvZz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+masterAuthorizedNetworksConfig:
+  cidrBlocks:
+  - cidrBlock: 0.0.0.0/0
+    displayName: Allow VPC Traffic
+  enabled: true
+  privateEndpointEnforcementEnabled: true
+monitoringConfig:
+  advancedDatapathObservabilityConfig: {}
+  componentConfig:
+    enableComponents:
+    - SYSTEM_COMPONENTS
+    - POD
+    - DAEMONSET
+    - DEPLOYMENT
+    - STATEFULSET
+    - STORAGE
+    - HPA
+    - KUBELET
+    - CADVISOR
+  managedPrometheusConfig:
+    enabled: true
+monitoringService: monitoring.googleapis.com/kubernetes
+name: yukaringermany-gke
+network: yukaringermany-gke-vpc-e28f434
+networkConfig:
+  defaultEnablePrivateNodes: true
+  defaultSnatStatus: {}
+  network: projects/yukaringermany-gke/global/networks/yukaringermany-gke-vpc-e28f434
+  serviceExternalIpsConfig: {}
+  subnetwork: projects/yukaringermany-gke/regions/europe-west3/subnetworks/yukaringermany-gke-private-subnet-fe8a68e
+nodeConfig:
+  diskSizeGb: 100
+  diskType: pd-balanced
+  effectiveCgroupMode: EFFECTIVE_CGROUP_MODE_V2
+  imageType: COS_CONTAINERD
+  kubeletConfig:
+    insecureKubeletReadonlyPortEnabled: true
+  loggingConfig: {}
+  machineType: e2-small
+  metadata:
+    disable-legacy-endpoints: 'true'
+  oauthScopes:
+  - https://www.googleapis.com/auth/monitoring
+  - https://www.googleapis.com/auth/devstorage.read_only
+  - https://www.googleapis.com/auth/logging.write
+  - https://www.googleapis.com/auth/cloud-platform
+  - https://www.googleapis.com/auth/compute
+  preemptible: true
+  serviceAccount: default
+  shieldedInstanceConfig:
+    enableIntegrityMonitoring: true
+  windowsNodeConfig: {}
+nodePoolDefaults:
+  nodeConfigDefaults:
+    loggingConfig:
+      variantConfig:
+        variant: DEFAULT
+nodePools:
+- autoscaling:
+    enabled: true
+    locationPolicy: ANY
+    maxNodeCount: 1
+    minNodeCount: 1
+  config:
+    diskSizeGb: 100
+    diskType: pd-balanced
+    effectiveCgroupMode: EFFECTIVE_CGROUP_MODE_V2
+    imageType: COS_CONTAINERD
+    kubeletConfig:
+      insecureKubeletReadonlyPortEnabled: true
+    loggingConfig: {}
+    machineType: e2-small
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/cloud-platform
+    - https://www.googleapis.com/auth/compute
+    preemptible: true
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+    windowsNodeConfig: {}
+  etag: 2eda58b8-7b7e-4f23-85ec-62c6a06f1da8
+  initialNodeCount: 1
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/yukaringermany-gke/zones/europe-west3-b/instanceGroupManagers/gke-yukaringermany-g-yukaringermany-g-2752567b-grp
+  - https://www.googleapis.com/compute/v1/projects/yukaringermany-gke/zones/europe-west3-a/instanceGroupManagers/gke-yukaringermany-g-yukaringermany-g-06e697e1-grp
+  - https://www.googleapis.com/compute/v1/projects/yukaringermany-gke/zones/europe-west3-c/instanceGroupManagers/gke-yukaringermany-g-yukaringermany-g-8c4f6283-grp
+  locations:
+  - europe-west3-b
+  - europe-west3-a
+  - europe-west3-c
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '110'
+  name: yukaringermany-gke-node-pool-0283ea8
+  networkConfig:
+    enablePrivateNodes: true
+    podIpv4CidrBlock: 10.56.0.0/14
+    podIpv4RangeUtilization: 0.0029
+    podRange: gke-yukaringermany-gke-pods-753373ba
+  podIpv4CidrSize: 24
+  selfLink: https://container.googleapis.com/v1/projects/yukaringermany-gke/locations/europe-west3/clusters/yukaringermany-gke/nodePools/yukaringermany-gke-node-pool-0283ea8
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.31.1-gke.2105000
+notificationConfig:
+  pubsub: {}
+privateClusterConfig:
+  enablePrivateNodes: true
+  masterIpv4CidrBlock: 10.0.0.0/28
+  privateEndpoint: 10.0.0.2
+  publicEndpoint: 35.246.221.83
+rbacBindingConfig:
+  enableInsecureBindingSystemAuthenticated: true
+  enableInsecureBindingSystemUnauthenticated: true
+releaseChannel:
+  channel: REGULAR
+resourceLabels:
+  goog-pulumi-provisioned: 'true'
+securityPostureConfig:
+  mode: BASIC
+  vulnerabilityMode: VULNERABILITY_MODE_UNSPECIFIED
+selfLink: https://container.googleapis.com/v1/projects/yukaringermany-gke/locations/europe-west3/clusters/yukaringermany-gke
+servicesIpv4Cidr: 34.118.224.0/20
+shieldedNodes:
+  enabled: true
+status: RUNNING
+subnetwork: yukaringermany-gke-private-subnet-fe8a68e
+zone: europe-west3
