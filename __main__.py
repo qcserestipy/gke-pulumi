@@ -4,6 +4,7 @@ from gke.network import NetworkStack
 from gke.cluster import GkeClusterStack 
 from gke.compute import GkeNodePoolStack
 from gke.bastion import GkeBastionHostStack
+from gke.moodle import MoodleStack
 
 # Load configuration
 config = pulumi.Config()
@@ -63,4 +64,13 @@ deployment = Deployment(
         },
     },
     opts=pulumi.ResourceOptions(provider=gke_cluster_stack.k8s_provider)
+)
+
+
+moodle_stack = MoodleStack(
+    name="moodle",
+    region=region,
+    vpc=network_stack.vpc,
+    k8s_provider=gke_cluster_stack.k8s_provider,
+    cluster_name=gke_cluster_stack.gke_cluster.name
 )
