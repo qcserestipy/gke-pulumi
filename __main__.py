@@ -43,35 +43,35 @@ gke_bastion_host = GkeBastionHostStack(
 )
 
 
-# from pulumi_kubernetes.apps.v1 import Deployment
+from pulumi_kubernetes.apps.v1 import Deployment
 
-# deployment = Deployment(
-#     "nginx-deployment",
-#     spec={
-#         "selector": {"matchLabels": {"app": "nginx"}},
-#         "replicas": 2,
-#         "template": {
-#             "metadata": {"labels": {"app": "nginx"}},
-#             "spec": {
-#                 "containers": [
-#                     {
-#                         "name": "nginx",
-#                         "image": "nginx",
-#                         "ports": [{"containerPort": 80}],
-#                     }
-#                 ]
-#             },
-#         },
-#     },
-#     opts=pulumi.ResourceOptions(provider=gke_cluster_stack.k8s_provider)
-# )
+deployment = Deployment(
+    "nginx-deployment",
+    spec={
+        "selector": {"matchLabels": {"app": "nginx"}},
+        "replicas": 2,
+        "template": {
+            "metadata": {"labels": {"app": "nginx"}},
+            "spec": {
+                "containers": [
+                    {
+                        "name": "nginx",
+                        "image": "nginx",
+                        "ports": [{"containerPort": 80}],
+                    }
+                ]
+            },
+        },
+    },
+    opts=pulumi.ResourceOptions(provider=gke_cluster_stack.k8s_provider)
+)
 
 
-# moodle_stack = MoodleStack(
-#     name="moodle",
-#     region=region,
-#     vpc=network_stack.vpc,
-#     vpc_peering=network_stack.vpc_peering,
-#     k8s_provider=gke_cluster_stack.k8s_provider,
-#     cluster_name=gke_cluster_stack.gke_cluster.name
-# )
+moodle_stack = MoodleStack(
+    name="moodle",
+    region=region,
+    vpc=network_stack.vpc,
+    vpc_peering=network_stack.vpc_peering,
+    k8s_provider=gke_cluster_stack.k8s_provider,
+    cluster_name=gke_cluster_stack.gke_cluster.name
+)
