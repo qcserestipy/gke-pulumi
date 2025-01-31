@@ -2,8 +2,8 @@ import pulumi
 import pulumi_gcp as gcp
 
 # Define variables
-project_id = "yukaringermany-gke"
-workload_pool_name = "githuboauthpool"
+project_id = "spry-catcher-449515-h2"
+workload_pool_name = "githuboauth-pool"
 provider_name = "githuboauth-provider"
 service_account_name = "githubactions"
 repo_name = "qcserestipy/gke-pulumi"
