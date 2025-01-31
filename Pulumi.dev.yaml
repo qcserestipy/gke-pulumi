@@ -1,6 +1,6 @@
 config:
-  gcp:project: yukaringermany-gke
-  yukaringermany-gke:cluster_name: yukaringermany-gke
+  gcp:project: spry-catcher-449515-h2
+  yukaringermany-gke:cluster_name: spry-catcher-449515-h2
   yukaringermany-gke:cluster_region: europe-west3
   yukaringermany-gke:dbPassword:
     secure: AAABAJPsh8UUBla5l3+lvFQ1EiKswiBk06v2zFLkyPQ0AHypqkkYXfCD2vRi
