@@ -1,4 +1,4 @@
-name: yukaringermany-gke
+name: test-pulumi
 runtime:
   name: python
   options:
